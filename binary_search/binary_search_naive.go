@@ -1,4 +1,4 @@
-package binary_search_naive
+package main
 
 func binary_search(arr []int, find_item, low, high int) int {
 	// Assume the array is already sorted
