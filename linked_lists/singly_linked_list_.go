@@ -29,6 +29,34 @@ func (list *LinkedList) insert(data int) {
 	next_node.next = new_node_ptr
 }
 
+// *LinkedList passes the value of the struct by reference so we have access to it
+// You don't need to dereference manually but you can if you wish
+// Golang automatically dereferences structs
+func (list *LinkedList) delete(data int) {
+	if (*list).head == nil {
+		return
+	}
+
+	current_node := list.head
+	var previous_node *Node
+
+	for current_node != nil {
+		if current_node.data == data {
+			// Found the element
+			if previous_node == nil {
+				list.head = list.head.next
+			} else {
+				previous_node.next = current_node.next
+			}
+
+			return
+		} else {
+			previous_node = current_node
+			current_node = current_node.next
+		}
+	}
+}
+
 func (node *Node) String() (p string) {
 	if node == nil {
 		return "{}"
@@ -43,6 +71,28 @@ func main() {
 	linked_list.insert(1)
 	linked_list.insert(2)
 
+	fmt.Println(linked_list.String())
+
+	linked_list.delete(3)
+
+	fmt.Println(linked_list.String())
+	linked_list.delete(1)
+
+	fmt.Println(linked_list.String())
+	linked_list.insert(1)
+
+	fmt.Println(linked_list.String())
+	linked_list.insert(5)
+
+	fmt.Println(linked_list.String())
+	linked_list.delete(1)
+
+	fmt.Println(linked_list.String())
+	linked_list.insert(3)
+
+	fmt.Println(linked_list.String())
+
+	linked_list.delete(3)
 	fmt.Println(linked_list.String())
 }
 
